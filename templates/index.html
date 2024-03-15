@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Squeeze Momentum Stocks list</title>
+	</head>
+	<style>
+		table, th, td {
+		border:1px solid black;
+        font-size: 25px;
+		}
+		</style>
+	<body>
+		<table style="width:50%">
+			<h1>Squeeze Momentum Stocks</h1>
+			<tr>
+			<th>DateTime</th>
+			<th>Long Stocks</th>
+			<th>Short Stocks</th>
+			</tr>
+			{%for stock in stocks%}
+			<tr>
+				<td>{{stock[0]}}</td>
+				<td>{{stock[1]}}</td>
+				<td>{{stock[2]}}</td>
+				</tr>
+			{%endfor%}
+		</table>
+	</body>
+</html>
