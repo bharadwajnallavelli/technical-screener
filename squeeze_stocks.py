@@ -1,13 +1,21 @@
 import yfinance as yf
 import numpy as np
+from macd_4h import macd_run
 
 
 def run_code(stock_list):
     out_squeeze_long = []
     out_squeeze_short = []
+    macd_buy = []
+    macd_sell = []
     for stock_code in stock_list:
         # get stock prices
         df = yf.download(stock_code, period="1mo", interval="1h", threads=False, prepost=True, progress=False)
+        result = macd_run(df)
+        if result == "Buy":
+            macd_buy.append(stock_code)
+        elif result == "Sell":
+            macd_sell.append(stock_code)
         # parameter setup
         length = 20
         mult = 2
@@ -68,4 +76,4 @@ def run_code(stock_list):
         enter_short = short_cond1 & short_cond2
         if enter_short:
             out_squeeze_short.append(stock_code)
-    return out_squeeze_long, out_squeeze_short
+    return out_squeeze_long, out_squeeze_short, macd_buy, macd_sell
